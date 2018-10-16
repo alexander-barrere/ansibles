@@ -1,0 +1,11 @@
+---
+- hosts: all
+  tasks:
+  - name: UFW Disable
+    service: name=ufw state=stopped enabled=no
+  - name: Install ferm
+    apt: name=ferm state=installed
+  - name: Configure ferm
+    template: src=/home/user/data/ferm.conf.j2 dest=/etc/ferm/ferm.conf
+  - name: Restart ferm
+    service: name=ferm state=started enabled=yes
